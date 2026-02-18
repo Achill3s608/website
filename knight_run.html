@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> johnny's website </title>
+	<link href='cyanobacteria.css' rel='stylesheet' type='text/css' media='all'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<meta charset='utf-8'>
+</head>
+<body>
+<div class = 'crt'>
+	<div class='container'>
+		<header>
+			<a href = 'main.html'>
+                <img src = 'assets/home_button.png' alt = 'Home Button' width = '88' height = '31' id = 'mask'>
+            </a>
+			<span>Knight Run</span>
+		</header>
+		
+		<section class = "column full">
+			<canvas id="game_canvas"></canvas>
+            <script src="/games/knight_run/index.js"></script>
+				<script>
+					const myWasm = '/games/knight_run/index';
+					const myPck = '/games/knight_run/index.pck';
+					const engine = new Engine();
+					const canvas_element = document.getElementById('game_canvas');
+					Promise.all([
+						// Load and init the engine
+						engine.init(myWasm),
+						// And the pck concurrently
+						engine.preloadFile(myPck),
+					]).then(() => {
+						// Now start the engine.
+						return engine.start({ args: ['--main-pack', myPck],  canvasResizePolicy: 0 });
+					}).then(() => {
+						console.log('Engine has started!');
+					});
+                </script>
+		</section>
+    </div>
+	<footer>
+		<span>cyanobacteria.css by <a href='https://ribo.zone/free/layouts/'>ribo.zone</a></span>
+	</footer>
+</div>
+</body>
+</html>
